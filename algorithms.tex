@@ -13,7 +13,12 @@ This we can simply solve for $u(x_i, t_{j+1}$ to get
     +  \left( u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j) \right)
        \frac{\Delta t}{\Delta x^2}.
 \end{align*}
-Now we can find any point on $u_{j+1}$ independently of each other as long as we know the previous timestep, $u_j$. We can do a simple loop through $u$ to set all the new positions. The endpoints need to be set outside the loop. In this case the endpoints are fixed, so we need to simply not change them. To solve for several time steps this loop can be placed in an outer time loop.
+Now we can find any point on $u_{j+1}$ independently of each other
+as long as we know the previous timestep, $u_j$. We can do a simple
+loop through $u$ to set all the new positions. The endpoints need
+to be set outside the loop. In this case the endpoints are fixed,
+so we need to simply not change them. To solve for several time
+steps this loop can be placed in an outer time loop.
 \begin{algorithm}
     \For{j = 1, 2, 3, \cdots}
         \For{i = 2, 3, \cdots , n-2, n-1}

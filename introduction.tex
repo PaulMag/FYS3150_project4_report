@@ -1,7 +1,31 @@
-The purpose of this exercise is to simulate the diffusion of signal molecules between neurons, both analytically and numerically. These molecules are transmitted from a presynaptic membrane and captured by a postsynaptic membrane. The space in between these membranes is the synaptic cleft, and this is the area we will simulate.
+The purpose of this exercise is to simulate the diffusion of signal
+molecules between neurons, both analytically and numerically. These
+molecules are transmitted from a presynaptic membrane and captured
+by a postsynaptic membrane. The space in between these membranes is
+the synaptic cleft, and this is the area we will simulate.
 
-To simplify the problem we will approximate this event by assuming that all movement happens in the same direction, so that we will only have one spatial dimension plus time. I.e. we are thinking of the membranes as being infinitely large and parallel, so that on average, there is no total movement parallel to the membranes, only parallel to a normal line between them. This approximation is valid if both membranes are very large and flat compared to the width of the synaptic cleft.
+To simplify the problem we will approximate this event by assuming
+that all movement happens in the same direction, so that we will
+only have one spatial dimension plus time. I.e. we are thinking of
+the membranes as being infinitely large and parallel, so that on
+average, there is no total movement parallel to the membranes, only
+parallel to a normal line between them. This approximation is valid
+if both membranes are very large and flat compared to the width of
+the synaptic cleft.
 
-The spatial direction is called $x$ and time $t$. The position of the presynaptic membrane is $x=0$ and the postsynaptic membrane is at $x=1$. The synaptic cleft is the area between, $x \in [0,1]$. We will not look at discrete signal molecules, but at a floating density of molecules at a given point. This is a valid approximation if there are very many molecules. The density at a given position is called $u(x)$. The presynaptic membrane will transmit signal molecules in such a way that $u(0)=11$ always. The postsynaptic membrane absorbs molecules in such a way that $u(1)=0$ always.
+The spatial direction is called $x$ and time $t$. The position of
+the presynaptic membrane is $x=0$ and the postsynaptic membrane is
+at $x=1$. The synaptic cleft is the area between, $x \in [0,1]$. We
+will not look at discrete signal molecules, but at a floating
+density of molecules at a given point. This is a valid
+approximation if there are very many molecules. The density at a
+given position is called $u(x)$. The presynaptic membrane will
+transmit signal molecules in such a way that $u(0)=11$ always. The
+postsynaptic membrane absorbs molecules in such a way that $u(1)=0$
+always.
 
-At $t=0$ the synaptic cleft is empty, so $u(x)=0$  for $0 < x \leq 1$. When $t > 0$ the cleft will begin to fill up, until it eventually reaches a steady state where the rate at which molecules are removed from the system is the same as the rate at which they are added.
+At $t=0$ the synaptic cleft is empty, so $u(x)=0$  for $0 < x \leq
+1$. When $t > 0$ the cleft will begin to fill up, until it
+eventually reaches a steady state where the rate at which molecules
+are removed from the system is the same as the rate at which they
+are added.
