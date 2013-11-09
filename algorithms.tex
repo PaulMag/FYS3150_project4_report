@@ -24,7 +24,8 @@ steps this loop can be placed in an outer time loop.
         \For{i = 2, 3, \cdots , n-2, n-1}
             \State $ u_{new}(x_i, t_{j+1})
                 = u(x_i, t_j)
-                + \left( u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j) \right
+                + \left( u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j)
+				\right)
                     \frac{\Delta t}{\Delta x^2} $
         \EndFor
         \State $ u = u_{new} $
