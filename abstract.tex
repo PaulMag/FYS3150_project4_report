@@ -1,17 +1,19 @@
 
 Communication in the brain relies heavily on the diffusion of neurotransmitters
-across the synaptic cleft, that separates the cell membranes of two cells.
+across the synaptic cleft, which separates the cell membranes of two cells.
 A solution to the diffusion equation can be used to describe this process, so 
-we apply three numerical methods for solving the one-dimensional case. A closed
+we apply three numerical methods for solving the one-dimensional case. The closed
 form solution is used to analyze the numerical accuracy of the explicit
 forward Euler, and the implicit backward Euler and Crank-Nicolson scheme. It
 shows that the explicit forward Euler algorithm yields the most accurate
-results at the loss of stability, while the backward case is stable, but with
-poor accuracy. The Crank-Nicolson scheme applies both
+results for small temporal step lengths, but at the loss of stability.
+The backward case is stable, but with the
+poorest accuracy. The Crank-Nicolson scheme applies both
 the explicit forward Euler and the implicit backward Euler, resulting in a
-stable method, with an accuracy in between the two Euler schemes.
-The implicit Crank-Nicolson scheme is
-then preferred in applications where a very small spatial step length is required,
+stable method, with an accuracy that surpasses the forward Euler scheme for
+higher temporal step lengths. 
+The implicit Crank-Nicolson scheme seems
+then to be preferred in applications where a very small spatial step length is required,
 as to avoid compensating with an even smaller temporal step length --- which will
 induce a penalty in computation time.
 
