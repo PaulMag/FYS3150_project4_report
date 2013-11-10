@@ -1,0 +1,33 @@
+
+Communication in the brain relies heavily on the diffusion of neurotransmitters
+across the synaptic cleft, that separates the cell membranes of two cells.
+A solution to the diffusion equation can be used to describe this process, so 
+we apply three numerical methods for solving the one-dimensional case. A closed
+form solution is used to analyze the numerical accuracy of the explicit
+forward Euler, and the implicit backward Euler and Crank-Nicolson scheme. It
+shows that the explicit forward Euler algorithm yields the most accurate
+results at the loss of stability, while the backward case is stable, but with
+poor accuracy. The Crank-Nicolson scheme applies both
+the explicit forward Euler and the implicit backward Euler, resulting in a
+stable method, with an accuracy in between the two Euler schemes.
+The implicit Crank-Nicolson scheme is
+then preferred in applications where a very small spatial step length is required,
+as to avoid compensating with an even smaller temporal step length --- which will
+induce a penalty in computation time.
+
+% This was part of the unfinished first draft
+%The dominant means of communication between neurons in the brain depend on
+%diffusion of signal molecules called \emph{neurotransmitters} across the
+%synaptic cleft that separates the cell membranes of two cells. The
+%neurotransmitters are released by vesicles in the axon terminal, upon which
+%receptors on the postsynaptic side receive the signal. Further insight in this
+%process can be helpful within the field of medicine for treating patients that
+%suffer from various illnesses caused by impaired communication in the brain.
+%
+%We will try to simulate the process of diffusion of neurotransmitters across the
+%synaptic cleft by solving the diffusion equation. We do the simulation by
+%solving the one-dimensional case using three numerical methods, then 
+%
+%We will however, in our work, mostly consider the differences in numerical
+%accuracy between various numerical methods that solve the one-dimensional case.
+
