@@ -4,15 +4,15 @@ to compare it with a closed form solution. We're interested in finding a
 solution for the one-dimensional diffusion equation
 %
 \begin{equation}
-	\frac{\partial u(x,t)}{\partial t} = \frac{\partial^2 u(x,t)}{\partial x^2}
-	\ x \in [0,d], \ t > 0,
+	\frac{\partial u(x,t)}{\partial t} = \frac{\partial^2 u(x,t)}{\partial x^2},
+	\hspace{1cm} x \in [0,d], \ t > 0,
 	\label{eq:diffusioneq}
 \end{equation}
 %
 where $d = 1$, boundary conditions 
 %
 \begin{align}
-	u(0,t) = 1, \hspace{4cm} u(1,t) = 0
+	u(0,t) = 1, \hspace{1cm} u(1,t) = 0
 	\label{eq:bc}
 \end{align}
 %
@@ -42,15 +42,15 @@ be on the form
 Applying the boundary conditions \refeq{bc} we get
 %
 \begin{align*}
-	u_s(0) &= B = 1
-	u_s(1) &= A + 1 = 0, \Rightarrow \ A = -1
+	u_s(0) &= B = 1 \\
+	u_s(1) &= A + 1 = 0 \ \Rightarrow \ A = -1
 \end{align*}
 %
 which gives us
 %
 \begin{equation*}
 	u_s(x) = 1 - x.
-	label{eq:us*}
+%	\label{eq:us}
 \end{equation*}
 %
 We see now that we can define a new function as $v(x) = u(x) - u_s(x)$, which
@@ -64,11 +64,10 @@ has boundary conditions and initial condition
 	v(1) = u(1) - u_s(1) = 0 - 0 = 0
 	\label{eq:bc1new}
 \end{equation}
-\begin{equation}
-	v(x,0) = u(x,0) - u_s(x) \\
-	v(x,0) = x - 1.
-	\label{eq:newInitial}
-\end{equation}
+\begin{align}
+	v(x,0) &= u(x,0) - u_s(x) \nonumber \\
+	v(x,0) &= x - 1. \label{eq:newInitial}
+\end{align}
 %
 This means that solving the equation
 %
@@ -79,7 +78,7 @@ This means that solving the equation
 with boundary conditions
 %
 \begin{equation*}
-	v(0,t) = 0, \hspace{4cm} v(1,t) = 0
+	v(0,t) = 0, \hspace{1cm} v(1,t) = 0
 \end{equation*}
 %
 gives the same solution as solving \refeq{diffusioneq} with boundary conditions
@@ -91,9 +90,9 @@ This gives us
 %
 \begin{align}
 	\frac{\partial F(x)G(t)}{\partial t} &= \frac{\partial^2 F(x)G(t)}{\partial
-	x^2} \\
-	F(x)G'(t) &= \frac{\partial F'(x)G(t)}{\partial x} \\
-	F(x)G'(t) &= F''(x)G(t) \\
+	x^2} \nonumber \\
+	F(x)G'(t) &= \frac{\partial F'(x)G(t)}{\partial x} \nonumber \\
+	F(x)G'(t) &= F''(x)G(t) \nonumber \\
 	\frac{F''(x)}{F(x)} &= \frac{G'(t)}{G(t)}.
 	\label{eq:separate}
 \end{align}
@@ -101,43 +100,42 @@ This gives us
 Since \refeq{separate} needs to be fulfilled for all $x,t$ we require the two
 sides being equal to a constant, $-\lambda^2$.
 %
-\begin{align*}
-	\frac{F''(x)}{F(x)} &= -\lambda^2 \\
+\begin{align}
+	\frac{F''(x)}{F(x)} &= -\lambda^2 \nonumber \\
 	F''(x) + \lambda^2F(x) &= 0
 	\label{eq:sepF}
-\end{align*}
+\end{align}
 %
-\begin{align*}
-	\frac{G'(t)}{G(t)} &= -\lambda^2 \\
-	G'(t) = -\lambda^2G(t).
+\begin{align}
+	\frac{G'(t)}{G(t)} &= -\lambda^2 \nonumber \\
+	G'(t) &= -\lambda^2G(t).
 	\label{eq:sepG}
-\end{align*}
+\end{align}
 %
 The first equation, \refeq{sepF} is a second-order homogeneous linear
 differential equation with constant coefficients. We know the solution is on the
 form
 %
-\begin{equation*}
-	F(x) = c_1\exp(r_1x) + c_2\exp{r_2x},
+\begin{equation}
+	F(x) = c_1e^{r_1x} + c_2e^{r_2x},
 	\label{eq:F}
-\end{equation*}
+\end{equation}
 %
 with $r_1$, $r_2$ being the roots of the auxiliary equation
 %
-\begin{align*}
-	r^2 + \lambda^2 &= 0
-	r &= \pm i\lambda.
-	\label{eq:roots}
-\end{align*}
+\begin{align}
+	r^2 + \lambda^2 &= 0 \nonumber \\
+	r &= \pm i\lambda. \label{eq:roots}
+\end{align}
 %
 Inserting \refeq{roots} in \refeq{F} gives
 %
 \begin{align*}
-	F(x) &= c_1\exp{i\lambda x} + c_2\exp{-i\lambda x} \\
-	F(x) &= c_1\left[ \cos{\lambda x} + i\sin{\lambda x} \right] + c_2\left[
-	\cos{\lambda x} - i\sin{\lambda x} \right] \\
-	F(x) &= (c_1 + c_2)\cos{\lambda x} + i(c_1 - c_2)\sin{\lambda x} \\
-	F(x) &= A\sin{\lambda x} + B\cos{\lambda x}.
+	F(x) &= c_1e^{i\lambda x} + c_2e^{-i\lambda x} \\
+	F(x) &= c_1\left[ \cos{(\lambda x)} + i\sin{(\lambda x)} \right] + c_2\left[
+	\cos{(\lambda x)} - i\sin{(\lambda x)} \right] \\
+	F(x) &= (c_1 + c_2)\cos{(\lambda x)} + i(c_1 - c_2)\sin{(\lambda x)} \\
+	F(x) &= A\sin{(\lambda x)} + B\cos{(\lambda x)}.
 \end{align*}
 %
 The second equation, \refeq{sepG}, is a first order homogeneous ODE with
@@ -148,31 +146,32 @@ constant coefficients. We solve it by integrating
 	\frac{\mathrm{d}G(t)}{G(t)} &= - \lambda^2 dt \\
 	\int \frac{1}{G(t)} \ \mathrm{d}G(t) &= -\lambda^2 \int \mathrm{d}t \\
 	\ln{G(t)} &= -\lambda^2 t + d_1 \\
-	G(t) &= \exp{-\lambda^2 t + d_1} = \exp{d_1}\exp{-\lambda^2 t} \\
-	G(t) &= C\exp{-\lambda^2 t}.
+	G(t) &= e^{-\lambda^2 t + d_1} = e^{d_1}e^{-\lambda^2 t} \\
+	G(t) &= Ce^{-\lambda^2 t}.
 \end{align*}
 %
-We can determine the coefficients $A,B,C$ from the boundary conditions
-\refeq{bc0new}, \refeq{bc1new} and initial condition \refeq{newInitial}.
+We can determine the coefficient $A,B,C$ from the boundary conditions
+\refeq{bc0new}, \refeq{bc1new}.
 %
 \begin{align*}
 	v(0,t) = F(0)G(t) &= 0 \\
-	BC\exp{-\lambda^2 t} &= 0 \\
-	\Rightarrow B = 0 \hspace{4cm} \mathrm{or} \hspace{4cm} C = 0.
+	BCe^{-\lambda^2 t} &= 0 \\
+	B = 0 \ \vee \ C &= 0.
+%	B = 0 \hspace{1cm} \mathrm{or} \hspace{1cm} C &= 0.
 \end{align*}
 %
-The case where $C = 0$ is a trivial case where there is no time development, and
+The case where $C = 0$ is a trivial case where there is no time development, so 
 we are not interested in this solution. We let $B = 0$, which gives us
 %
 \begin{align*}
-	v(1,t) = A\sin{\lambda} C\exp{-\lambda^2 t} &= 0
-	\Rightarrow \lambda &= n\pi.
+	v(1,t) &= A\sin{(\lambda)} \ Ce^{-\lambda^2 t} = 0 \\
+	&\Rightarrow \lambda = n\pi.
 \end{align*}
 %
 One solution of $v(x,t)$ is then
 %
 \begin{equation*}
-	v(x,t) =  D_n\sin{n\pi x}\exp{-n^2\pi^2 t},
+	v(x,t) =  D_n\sin{(n\pi x)}e^{-n^2\pi^2 t},
 \end{equation*}
 %
 where we have used $A_nC_n = D_n$.
@@ -181,41 +180,41 @@ infinite number of solutions. Because the diffusion equation is linear, a
 superposition of solutions is also a solution for $v(x,t)$, so
 %
 \begin{equation*}
-	\sum\limits_{n=1}^{\infty} D_n\sin{n\pi x}\exp{-n^2\pi^2 t}.
+	\sum\limits_{n=1}^{\infty} D_n\sin{(n\pi x)}e^{-n^2\pi^2 t}.
 \end{equation*}
 %
 We determine the coefficients $D_n$ from the initial condition
 \refeq{newInitial}
 %
 \begin{equation*}
-	v(x,0) = \sum\limits_{n=1}^{\infty} D_n\sin{n\pi x} = x - 1.
+	v(x,0) = \sum\limits_{n=1}^{\infty} D_n\sin{(n\pi x)} = x - 1.
 \end{equation*}
 %
 We recognize that the coefficients $D_n$ are the Fourier coefficients for
-$x - 1$. We can then determine $D_n$ from the Fourier sine series
+$x - 1$. We can then determine $D_n$ from the Fourier series
 %
 \begin{align*}
-	D_n &= 2\int\limits_0^1 (x - 1)\sin{n\pi x} \ \mathrm{d}x \\
-	&= 2 \int\limits_0^1 \left( x\sin{n\pi x} - \sin{n\pi x} \right) \
+	D_n &= 2\int\limits_0^1 (x - 1)\sin{(n\pi x)} \ \mathrm{d}x \\
+	&= 2 \int\limits_0^1 \left[ x\sin{(n\pi x)} - \sin{(n\pi x)} \right] \
 	\mathrm{d}x \\
-	&= 2 \left( \left[ x(-\cos{n\pi x}\frac{1}{n\pi} \right]\limits_0^1 
-	+ \int\limits_0^1\frac{1}{n\pi}\cos{n\pi x} \ \mathrm{d}x - \int\limits_0^1
-	\sin{n\pi x} \ \mathrm{d}x \right) \\
-	&= 2 \left( -\frac{1}{n\pi}\cos{n\pi} + \frac{1}{n^2\p^2}\left[
-		\sin{n\pi x}
-	\right]\limits_0^1 + \left[ \frac{1}{n\pi}\cos{n\pi x} \right]\limits_0^1
+	&= 2 \left( \left[ -x\cos{(n\pi x)}\frac{1}{n\pi} \right]_0^1 
+	+ \int\limits_0^1\frac{1}{n\pi}\cos{(n\pi x)} \ \mathrm{d}x - \int\limits_0^1
+	\sin{(n\pi x)} \ \mathrm{d}x \right) \\
+	&= 2 \left( -\frac{1}{n\pi}\cos{(n\pi)} + \frac{1}{n^2\pi^2}\left[
+		\sin{(n\pi x)}
+	\right]_0^1 + \left[ \frac{1}{n\pi}\cos{(n\pi x)} \right]_0^1
 	\right) \\
-	&= 2 \left( \frac{\sin{n\pi}}{n^2\pi^2} - \frac{1}{n\pi} \right) \\
+	&= 2 \left( \frac{\sin{(n\pi)}}{n^2\pi^2} - \frac{1}{n\pi} \right) \\
 	&= -\frac{2}{n\pi}.
 \end{align*}
 %
 Now that we have found the coefficients $D_n$, we have our solution $v(x,t)$,
 and thus we can find $u(x,t)$.
 %
-\begin{equation*}
-	v(x,t) = u(x,t) - u_s(x) \\
-	u(x,t) = v(x,t) + u_s(x) \\
-	u(x,t) = 1 - x - \sum\limits_{n=1}^{\infty} \frac{2}{n\pi}\sin{n\pi
-	x}\exp{-n^2\pi^2 t}.
-\end{equation*}
+\begin{align*}
+	v(x,t) &= u(x,t) - u_s(x) \\
+	u(x,t) &= v(x,t) + u_s(x) \\
+	u(x,t) &= 1 - x - \sum\limits_{n=1}^{\infty}
+	\frac{2}{n\pi}\sin{(n\pi x)}e^{-n^2\pi^2 t}.
+\end{align*}
 %
