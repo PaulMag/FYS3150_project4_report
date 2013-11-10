@@ -1,0 +1,27 @@
+In the following paragraphs, tests for different combinations of
+step sizes $\Delta x$ and $\Delta t$ are done. The solution given
+by the three integration schemes are then compared at two
+strategically chosen time points $t_1$ and $t_2$ so that at $u(x,
+t_1)$ the solution is curved but smooth and at $u(x, t_2)$ the
+solution is approximately linear.
+
+The test is done for $\Delta x = 1/10$ and $\Delta x = 1/100$.
+$\Delta t$ is chosen to be the upper limit decided by the criterium
+og stability \[ \alpha = \frac{\Delta t}{\Delta x^2} \leq
+\frac{1}{2}. \] For the CrankNicolson and BackwardEuler scheme
+stability will not be decided by this criterium, yet equal grounds
+for the simulation will make comparing more meaningful. This gives
+the following test cases.
+
+\begin{center}
+\begin{tabular}[htbp]{|l|c|c|}
+    \hline
+    Case & $\Delta x$ & $\Delta t$ \\
+    \hline
+    \hline
+    Case 1 & 1/10 = 0.1 & $1/200 = 5 \cdot 10^{-3}$ \\
+    \hline
+    Case 2 & 1/100 = 0.01 & $1/20000 = 5 \cdot 10^{-5}$ \\
+    \hline
+\end{tabular}
+\end{center}
