@@ -6,9 +6,9 @@ With the forward scheme we have
     \frac{u(x_i, t_{j+1}) - u(x_i, t_j)}{\Delta t}
     &= \frac{u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j)}{\Delta x^2}.
 \end{align*}
-This we can simply solve for $u(x_i, t_{j+1}$ to get
+This we can simply solve for $u(x_i, t_{j+1})$ to get
 \begin{align*}
-    u(x_i, t_{j+1}) \\
+    u(x_i, t_{j+1})
     &= u(x_i, t_j)
     +  \left( u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j) \right)
        \frac{\Delta t}{\Delta x^2}.
@@ -37,4 +37,4 @@ steps this loop can be placed in an outer time loop.
 \subsection{Backward Euler}
 
 
-\subsection{Crank-Nicelson}
+\subsection{Crank-Nicolson}
