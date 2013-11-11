@@ -1,2 +1,29 @@
-\bildeto{figures/error_100_0.05_0.1.png}{figures/error_100_1_0.1.png}{fig:error_stable}{$\alpha=0.1$ Forward Euler is well within its stability condition. Top: Before stationairy state. Bottom: After stationairy state.}
-\bildeto{figures/error_100_0.05_0.5.png}{figures/error_100_1_0.5.png}{fig:error_limit}{$\alpha=0.5$ Forward Euler is on the edge of being stable. Top: Before stationairy state. Bottom: After stationairy state.}
+Now we want to look at the size of the actual error of the three schemes. We 
+look at absolute differences between the numerical methods and the analytical 
+solution.
+
+\bildeto{figures/error_100_0.05_0.1.png}{figures/error_100_1_0.1.png}
+{fig:error_stable}{$\alpha=0.1$ Forward Euler is well within its stability 
+condition. Top: Before stationairy state. Bottom: After stationairy state.}
+
+\bildeto{figures/error_100_0.05_0.5.png}{figures/error_100_1_0.5.png}
+{fig:error_limit}{$\alpha=0.5$ Forward Euler is on the edge of being stable. 
+Top: Before stationairy state. Bottom: After stationairy state.}
+
+The first error analysis is from $\alpha = 0.1$, so that all the methods are 
+well within the stable range. From figure \refig{error_stable} we can see that 
+the forward scheme ends up with the smalles error, the implicit backward scheme 
+gives the largest error, and Cran-Nicolson simply appear to be a rough average 
+of the other two.
+
+The next analysis is from $\alpha = 0.5$ such that the explicit method is just 
+within its stable range. In figure \refig{error_limit} is the result. Both 
+Forward and Backward Euler has increased their errors by an order of magnitude, 
+but Forward Euler increased the most, relative to the previous case. It is 
+still stable, but it behaves weirdly, suggesting it is on the verge of failing. 
+The Crank-Nicolson method appears to have not been affected at all by the 
+increase in timestep, suggesting this is a very stable method.
+
+When increasing $\alpha$ from $0.5$ to $0.51$ the Forward Euler error 
+immediatelly blew out of proportions and was thus useless, while the implicit 
+methods only changed slightly.
