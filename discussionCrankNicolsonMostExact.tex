@@ -1,2 +1,22 @@
-Use results from ex d to say something about why the CN method
-seems more exact using among other figure \refig{zoomed_schemes}.
+Observe also that in figure \refig{zoomed_schemes}, the scheme
+closest to the closed form solution is the Crank Nicolson scheme.
+Via utilizing the mean of the two algorithms, Forward Euler and
+Backward Euler, the Crank Nicolson scheme has ``inherited'' the
+best properties of the other two methods. This gives it stability
+from the implicit Euler method and accuracy from the explicit Euler
+method.
+
+In test case 1, the difference in accuracy between the explicit
+Euler and the implicit methods is much more distinguishable than
+for test case 2. This suggests a greater dependence on the number
+of time steps for the FE method than for the others.
+
+One must also mention that implicit schemes only become more
+practical when dealing with stiff equations. That is, problems
+which have rapid changes. Still, implementing the Crank Nicolson
+scheme means that for problems as the one describes here, very
+small spatial scales can be simulated, without the need of a tiny
+time step. This can ease computation time vastly.
+
+All things considered, the Crank Nicolson scheme provides the best
+results for this particular problem.
