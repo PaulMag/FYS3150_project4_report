@@ -107,7 +107,9 @@ others.
     \State $ u_\textrm{new}(x_n) = u(x_n) / \hat{b}_n $
     \For{i = n-1, n-2, \dots, 2, 1}
         \State $ u_\textrm{new}(x_i)
-                 = \left[ \hat{u}(x_i) - u_\textrm{new}(x_n) \right] / \hat{b} $
+                 = \left[
+                   \hat{u}(x_i) - u_\textrm{new}(x_n)
+                   \right] / \hat{b}_i $
     \EndFor
 \end{algorithmic}
 This entire process can then be placed inside a time loop and repeated as many 
@@ -116,3 +118,28 @@ times as we like.
 
 
 \subsection{Crank-Nicolson}
+
+The Crank-Nicolson scheme combines the forward and backward schemes.
+\begin{align*}
+    \frac{u(x_i, t_{j+1}) - u(x_i, t_j)}{\Delta t}
+    &= \frac{u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j)}
+            {2 \Delta x^2} \\
+    &+ \frac{u(x_{i+1}, t_{j+1}) - 2u(x_i, t_{j+1}) + u(x_{i-1}, t_{j+1})}
+            {2 \Delta x^2}
+\end{align*}
+The first part of the right-hand-side of this equation is a Forward Euler, 
+while the second part is a Backward euler. Both are divided by two, so we get 
+an average value. To implement this numerically is as simple as performing half
+the timestep with one method so that we reach a middlestate $u_\textrm{mid}$ 
+and the rest with the other to reach $u_\textrm{new}$.
+\begin{algorithmic}
+    \For{j = 1, 2, 3, \dots}
+        \State $ u_\textrm{mid} = 
+                 \textrm{Forward Euler on } u
+                 \textrm{ with timestep } \frac{\Delta t}{2} $
+        \State $ u_\textrm{new} = 
+                 \textrm{Backward Euler on } u_\textrm{mid}
+                 \textrm{ with timestep } \frac{\Delta t}{2} $
+        \State $ u = u_{new} $
+    \EndFor
+\end{algorithmic}
