@@ -89,32 +89,29 @@ and $u_j$ will change. Let us put a hat on the changed elements. Note that
 $\hat{b}$ must be a vector now. The first iteration must happen outside the loop
 to maintain the correct boundary condition, i.e. not changing the boundaries. 
 This time we define the first element to be $u(x_0)$.
-%         b_alt(0) = b(0);
-%         u_alt(0) = u(0) - u0 * a(0);
-% 
-%         for (int i=1; i<n; i++) {
-%             /* Forwards substitution. */
-%             double factor = a(i) / b_alt(i-1); // avoids doing this twice
-% 
-%             b_alt(i) = b(i) - factor * c(i-1);
-%             u_alt(i) = u(i) - factor * u_alt(i-1);
-%         }
 \begin{algorithmic}
     \State $ \hat{b}_1 = b $
     \State $ \hat{u}(x_1) = u(x_1) - u(x_0) \cdot a $
     \For{i = 2, 3, \dots, n-1, n}
-        \State $ \hat{b}(x_i)
-                 = b    - c \cdot a / \hat{b}(x_{i-1}) $
+        \State $ \hat{b}_i
+                 = b    - c \cdot a / \hat{b}_{i-1} $
         \State $ \hat{u}(x_i)
-                 = u(x_i) - \hat{u}(x_{i-1}) \cdot a / \hat{b}(x_{i-1}) $
+                 = u(x_i) - \hat{u}(x_{i-1}) \cdot a / \hat{b}_{i-1} $
     \EndFor
 \end{algorithmic}
-% 
-%         u_new(n-1) = u(n-1) / b_alt(n-1);
-%         for (int i=n-2; i>=0; i--) {
-%             /* Backwards substitution. */
-%             u_new(i) = (u_alt(i) - u_new(i+1) * c(i)) / b_alt(i);
-%         }
+Next comes a bacward substitution where we set the upper diagonal to be $0$ and 
+then solve for the nest timestep $u_\textrm{new}$. Again, the first iteration
+must happen outside the loop because it has different conditions than the 
+others.
+\begin{algorithmic}
+    \State $ u_\textrm{new}(x_n) = u(x_n) / \hat{b}_n $
+    \For{i = n-1, n-2, \dots, 2, 1}
+        \State $ u_\textrm{new}(x_i)
+                 = \left[ \hat{u}(x_i) - u_\textrm{new}(x_n) \right] / \hat{b} $
+    \EndFor
+\end{algorithmic}
+This entire process can then be placed inside a time loop and repeated as many 
+times as we like.
 
 
 
