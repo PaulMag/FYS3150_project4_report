@@ -4,11 +4,24 @@ molecules are transmitted from a presynaptic membrane and captured
 by a postsynaptic membrane. The space in between these membranes is
 the synaptic cleft, and this is the area we will simulate.
 
-To simplify the problem we will approximate this event by assuming
-that all movement happens in the same direction, so that we will
-only have one spatial dimension plus time. I.e. we are thinking of
-the membranes as being infinitely large and parallel, so that on
-average, there is no total movement parallel to the membranes, only
-parallel to a normal line between them. This approximation is valid
-if both membranes are very large and flat compared to the width of
-the synaptic cleft.
+This diffusion of molecules can be described via the diffusion
+equation \[ \frac{\partial u}{\partial t} = D\frac{\partial^2
+u}{\partial x^2}. \] In order to describe the physical situation
+a numerical integration scheme can be implemented.
+
+Solving this particular equation can provide challenges considering
+the double spatial derivative on the right hand side. This can be
+avoided via clever use of tridiagonal matrices.
+
+The problem is solved via the explicit Forward Euler scheme, the
+implicit Backward Euler scheme as well as the implicit Crank
+Nicolson scheme. At later stages, an error analysis comparing the
+three schemes is included to highlight potential error and to
+illustrate areas of stability.
+
+Each integration scheme produces an error and has an area of
+stability. When comparing different numerical methods, these two
+are key aspects.
+
+A closed form solution to the problem is also found in order to
+compare the numerical results and illustrate errors.
