@@ -1,2 +1,13 @@
-Discuss from figure \refig{zoomed_schemes} why some are below and
-others above.
+Figure \refig{zoomed_schemes} shows that the Forward Euler solution
+tends to have higher values than the closed form solution while the
+CrankNicolson and Backward Euler schemes tend to have lower values
+and lie closer to the closed form.
+
+The idea behind the Forward Euler scheme is to follow the tangent
+(the derivative) of the function a predetermined step size, in our
+case $\Delta t$. If the derivative tends to have positive values,
+this might cause the scheme to approximate values above the closed
+form.
+
+Considering the implicit Backward Euler scheme --- this method
+might have similar properties causing it to tend to lower values.
