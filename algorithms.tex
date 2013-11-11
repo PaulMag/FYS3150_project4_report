@@ -10,7 +10,7 @@ This we can simply solve for $u(x_i, t_{j+1})$ to get
 \begin{align*}
     u(x_i, t_{j+1})
     &= u(x_i, t_j)
-    +  \left( u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j) \right)
+    +  \left[ u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j) \right]
        \frac{\Delta t}{\Delta x^2}.
 \end{align*}
 Now we can find any point on $u_{j+1}$ independently of each other
@@ -23,18 +23,99 @@ steps this loop can be placed in an outer time loop.
     \State $ \alpha = \frac{\Delta t}{\Delta x^2} $
     \For{j = 1, 2, 3, \dots}
         \For{i = 2, 3, \dots , n-2, n-1}
-            \State $ u_{new}(x_i, t_{j+1})
-            = u(x_i, t_j)
-            + \left(
-              u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j)
-              \right) \alpha $
+            \State $ u_{new}(x_i)
+            = u(x_i)
+            + \left[
+              u(x_{i+1}) - 2u(x_i) + u(x_{i-1})
+              \right] \alpha $
         \EndFor
         \State $ u = u_{new} $
     \EndFor
 \end{algorithmic}
 
 
+
 \subsection{Backward Euler}
+
+With the backwards scheme we have
+\begin{align*}
+    u_t &= u_{xx} \\
+    \frac{u(x_i, t_j) - u(x_i, t_{j-1})}{\Delta t}
+    &= \frac{u(x_{i+1}, t_j) - 2u(x_i, t_j) + u(x_{i-1}, t_j)}{\Delta x^2}.
+\end{align*}
+Now we are working with the timesteps $j-1$ and $j$, so we might as well add 
+$1$ so that we can keep calling the next step $j+1$. If we also implement 
+$\alpha$ we get
+\begin{align*}
+    u(x_i, t_{j+1}) - u(x_i, t_j)
+    &= \left[
+       u(x_{i+1}, t_{j+1}) - 2u(x_i, t_{j+1}) + u(x_{i-1}, t_{j+1}) 
+       \right] \alpha \\       
+    - u(x_i, t_j)
+    &= - u(x_i, t_{j+1})
+       + \left[ u(x_{i+1}, t_{j+1}) - 2u(x_i, t_{j+1}) + u(x_{i-1}, t_{j+1}) 
+        \right] \alpha \\   
+    u(x_i, t_j)
+    &=         - \alpha \cdot u(x_{i-1}, t_{j+1})
+       + (1 + 2 \alpha) \cdot u(x_{i+1}, t_{j+1})   
+               - \alpha \cdot u(x_{i+1}, t_{j+1})
+\end{align*}
+Now we cannot find the next position $u_{j+1}$ in a straightforward manner, 
+since there are several dependencies on $u_{j+1}$, but we can set this equation 
+up as a matrix equation and solve for $u_{j+1}$ through row reduction.
+$$
+\begin{bmatrix}
+    1+2\alpha &   -\alpha &         0 &    \cdots &         0 \\
+      -\alpha & 1+2\alpha &   -\alpha &    \ddots &    \vdots \\
+            0 &   -\alpha & 1+2\alpha &    \ddots &         0 \\
+       \vdots &    \ddots &    \ddots &    \ddots &   -\alpha \\
+            0 &    \cdots &         0 &   -\alpha & 1+2\alpha
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+    u_{1,j+1} \\ u_{2,j+1} \\ u_{3,j+1} \\ \vdots \\ u_{n,j+1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    u_{1,j} \\ u_{2,j} \\ u_{3,j} \\ \vdots \\ u_{n,j}
+\end{bmatrix}
+$$
+The matrix being tridiagonal saves us some work. We only need to perform $2n$ 
+iterations to reduce it to a diagonal matrix so we can solve the equation. Let 
+us define $a$, $b$ and $c$ as being the values that fill the lower, middle, and 
+upper diagonal, respectively. First we will do a forward substitution to set 
+the lower diagonal (the $a$'s) to $0$. Then the elements on the middle diagonal 
+and $u_j$ will change. Let us put a hat on the changed elements. Note that 
+$\hat{b}$ must be a vector now. The first iteration must happen outside the loop
+to maintain the correct boundary condition, i.e. not changing the boundaries. 
+This time we define the first element to be $u(x_0)$.
+%         b_alt(0) = b(0);
+%         u_alt(0) = u(0) - u0 * a(0);
+% 
+%         for (int i=1; i<n; i++) {
+%             /* Forwards substitution. */
+%             double factor = a(i) / b_alt(i-1); // avoids doing this twice
+% 
+%             b_alt(i) = b(i) - factor * c(i-1);
+%             u_alt(i) = u(i) - factor * u_alt(i-1);
+%         }
+\begin{algorithmic}
+    \State $ \hat{b}_1 = b $
+    \State $ \hat{u}(x_1) = u(x_1) - u(x_0) \cdot a $
+    \For{i = 2, 3, \dots, n-1, n}
+        \State $ \hat{b}(x_i)
+                 = b    - c \cdot a / \hat{b}(x_{i-1}) $
+        \State $ \hat{u}(x_i)
+                 = u(x_i) - \hat{u}(x_{i-1}) \cdot a / \hat{b}(x_{i-1}) $
+    \EndFor
+\end{algorithmic}
+% 
+%         u_new(n-1) = u(n-1) / b_alt(n-1);
+%         for (int i=n-2; i>=0; i--) {
+%             /* Backwards substitution. */
+%             u_new(i) = (u_alt(i) - u_new(i+1) * c(i)) / b_alt(i);
+%         }
+
 
 
 \subsection{Crank-Nicolson}
