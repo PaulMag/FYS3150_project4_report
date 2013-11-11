@@ -8,15 +8,15 @@ method.
 
 In test case 1, the difference in accuracy between the explicit
 Euler and the implicit methods is much more distinguishable than
-for test case 2. This suggests a greater dependence on the number
-of time steps for the FE method than for the others.
+for test case 2. This suggests a greater dependence on the time
+step for the FE method than for the others.
 
-One must also mention that implicit schemes only become more
-practical when dealing with stiff equations. That is, problems
-which have rapid changes. Still, implementing the Crank Nicolson
-scheme means that for problems as the one describes here, very
-small spatial scales can be simulated, without the need of a tiny
-time step. This can ease computation time vastly.
+One must also mention that implicit schemes become more practical
+when dealing with stiff equations. That is, problems which have
+rapid changes. Still, implementing the Crank Nicolson scheme means
+that for problems as the one described here, very small spatial
+scales can be simulated, without the need of a tiny time step. This
+can ease computation time vastly.
 
 All things considered, the Crank Nicolson scheme provides the best
 results for this particular problem.
